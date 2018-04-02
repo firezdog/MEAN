@@ -1,0 +1,60 @@
+<!-- Fix the code:
+• The last character of each string in the words array doesn't show up.
+• The blank spaces are not appearing correctly. The cursor does not correctly shift to the right on blank spaces, instead it pauses on the previous letter and jumps to the next letter.
+-->
+
+<html>
+<head>
+	<title>Javascript Demo</title>
+	<style>
+		body {
+			background-color:black;
+			font-family: monospace;
+			color:white;
+			font-size:50px;
+			text-align: center;
+			margin-top:20%;
+		}
+		#magic{
+			color: #777;
+			border-right: 1px solid #777;
+			padding-right: 7px;
+			display: inline;
+		}
+	</style>copy
+</head>
+<body>
+    
+	Coding is <div id="magic"></div>
+    
+  <script>
+		var words = ["cat", "a lot of fun", "about not giving up", "challenging and empowering", "creative expression", "what I learned at CodingDojo!"],
+			el = document.getElementById('magic'),
+			word_counter = 0,
+			character_counter = 0;
+		function updateText()
+		{ 
+            // The HTML doesn't have time to update before the function is called again and resets the counter (basically, the function updates the DOM to e.g. "cat", but it's called again very soon after that, sees the counter is at the end of the word "cat", resets the counter, advances a word, AND clears the inner HTML -- so we never have a chance to see the full word). Resetting one position later gives it enough time. 
+            //For spaces, it should update the HTML with the space character -- currently it just updates the string, causing an asymmetry between what is added to the HTML and what is added to the string at that step. Finally, We don't want to use '++' in the space check, because that would change the value of the counter at the same time -- so we check first and then change if the check is positive.
+            if (words[word_counter][character_counter] == ' ') {
+                el.innerHTML += "&nbsp"
+                character_counter++;
+            }
+            else {
+                el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
+            }
+            if(character_counter == words[word_counter].length + 1)
+            {
+                word_counter++; 	//choose a different word
+                character_counter = 0;	//start over with the first character of the word
+                el.innerHTML = '';  //set the html to be blank
+                //if we're displaying the last word, go back to the first word
+                if(word_counter == words.length) {
+                    word_counter = 0;
+                }
+        }
+    }
+		setInterval(updateText,300);
+	</script>
+</body>
+</html>
