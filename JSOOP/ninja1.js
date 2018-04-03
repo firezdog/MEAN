@@ -11,17 +11,31 @@
 
 // sayName() - This should log that Ninja's name to the console.
 // showStats() - This should show the Ninja's Strength and Speed, as well as their health.
-// drinkSake() - This should add +10 Health to the Ninja
+// // drinkSake() - This should add +10 Health to the Ninja
+
 // Example Outputs
-const ninja1 = new Ninja("Hyabusa", 100, 4);
-ninja1.sayName();
+
+// const ninja1 = new Ninja("Hyabusa", 100, 4);
+// ninja1.sayName();
 // -> "My ninja name is Hyabusa!"
-console.log(ninja1.strength)
+// console.log(ninja1.strength)
 // -> undefined
-ninja1.showStats();
+// ninja1.showStats();
 // -> "Name: Hayabusa, Health: 100, Speed: 4, Strength: 3"
-ninja1.drinkSake();
+// ninja1.drinkSake();
 // -> "Drank sake. Name: Hyabusa, Speed: 4, Strength: 3, Health: 110"
+
+const blueNinja = new Ninja("Goemon");
+const redNinja = new Ninja("Bill Gates");
+redNinja.punch(blueNinja);
+// -> "Goemon was punched by Bill Gates and lost 5 Health!"
+blueNinja.kick(redNinja);
+// -> "Bill Gates was kicked by Goemon and lost 15 Health!"
+
+const dog = {}
+blueNinja.punch(dog);
+// -> "Ninjas can only punch ninjas."
+
 
 function Ninja (name, health, op_speed, op_strength) { // Assuming "by default" means other values could be assigned
     
@@ -56,5 +70,23 @@ function Ninja (name, health, op_speed, op_strength) { // Assuming "by default" 
         this.health += 10;
         console.log("Drank sake.")
         this.showStats();
+    }
+    this.punch = function(ninja) {
+        if (ninja.constructor === Ninja) {
+            console.log(`${ninja.name} was punched by ${this.name} and lost 5 health.`)
+            ninja.health -= 5;
+            ninja.showStats();
+        } else {
+            console.log("Ninjas only punch ninjas.")
+        }
+    }
+    this.kick = function(ninja) {
+        if (ninja.constructor === Ninja) {
+            console.log(`${ninja.name} was kicked by ${this.name} and lost ${15*strength} health.`)
+            ninja.health -= 15*strength;
+            ninja.showStats();
+        } else {
+            console.log("Ninjas can only kick ninjas.")
+        }
     }
 }
