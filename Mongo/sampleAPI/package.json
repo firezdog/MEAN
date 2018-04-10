@@ -1,0 +1,17 @@
+{
+  "name": "sampleAPI",
+  "version": "1.0.0",
+  "description": "A simple API that stores and and delivers a list of names.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Alex Leibowitz",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.14"
+  }
+}
