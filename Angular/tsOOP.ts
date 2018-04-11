@@ -21,7 +21,7 @@ class Bike {
     }
 }
 
-let bike1 = new Bike(30000,120);
+let bike1 = new Bike(30000,120);    
 let bike2 = new Bike(20000,90);
 let bike3 = new Bike(10000, 75);
 
