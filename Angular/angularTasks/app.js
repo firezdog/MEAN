@@ -8,8 +8,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //Angular setup
-app.use(express.static( __dirname + '/angularTasks/dist' ));
-
+app.use(express.static( __dirname + '/angularTasksApp/dist' ));
 //Mongoose setup
 mongoose.connect('mongodb://localhost/basic_mongoose');
 var Schema = mongoose.Schema;
