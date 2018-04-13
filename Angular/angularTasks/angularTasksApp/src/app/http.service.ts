@@ -14,10 +14,10 @@ export class HttpService {
     // allTasksObservable.subscribe(data => console.log("Got our tasks!", data));
     return this._http.get('/tasks');
   }
-  getOneTask() {
+  getOneTask(id) {
     // let oneTaskObservable = this._http.get('/tasks/5acf8eba1c66de0174ecbf1c');
     // oneTaskObservable.subscribe(data => console.log("Got the task!", data))
-    return this._http.get('/tasks/5acf8eba1c66de0174ecbf1c')
+    return this._http.get(`/tasks/${id}`)
   }
   // getPokemon() {
   //   let _this = this;

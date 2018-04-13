@@ -7,13 +7,14 @@ import { HttpService } from './http.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  num: number;
-  randNum: number;
-  str: string;
-  first_name: string;
-
+  // num: number;
+  // randNum: number;
+  // str: string;
+  // first_name: string;
+  showTasks: boolean = false;
   tasks;
-  task;
+  searched;
+  searchedTask;
   title = 'angularTaskApp';
   
   constructor(private _httpService: HttpService){};
@@ -27,12 +28,20 @@ export class AppComponent implements OnInit {
   getTasksFromService(){
     let all_tasks = this._httpService.getTasks();
     all_tasks.subscribe(data => {
-      // console.log("Got our tasks", data);
       this.tasks = data;
     });
-    let one_task = this._httpService.getOneTask();
-    one_task.subscribe(data => {
-      this.task = data;
-    });
+  }
+  show(){
+    this.showTasks = !this.showTasks;
+  }
+  findTask(){
+    this.searched = true;
+    let input = document.querySelector("input");
+    let taskNumber = Number(input.value)-1;
+    this.searchedTask = this.tasks[taskNumber]
+    console.log(!this.searchedTask);
+    // let one_task = this._httpService.getOneTask(id);
+    // one_task.subscribe(data => {
+    //   this.searchedTask = data;
   }
 }
