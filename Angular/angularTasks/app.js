@@ -40,7 +40,6 @@ app.get('/tasks/', function(req, res) {
 });
 //Update
 app.put('/tasks/:task', function(req,res) {
-    console.log(req.params.task);
     Task.findByIdAndUpdate(req.params.task, req.body, function(err, task) {
         if (err) {
             res.json({
@@ -87,6 +86,7 @@ app.post('/tasks/', function(req,res) {
 });
 //Delete
 app.delete('/tasks/:task', function(req,res) {
+    console.log("deleting");
     Task.findByIdAndRemove(req.params.task, function(err){
         if(err){
             res.json({

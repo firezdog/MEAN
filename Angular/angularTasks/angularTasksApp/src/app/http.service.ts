@@ -19,6 +19,15 @@ export class HttpService {
     // oneTaskObservable.subscribe(data => console.log("Got the task!", data))
     return this._http.get(`/tasks/${id}`)
   }
+  deleteTask(id) {
+    return this._http.delete(`/tasks/${id}`)
+  }
+  postTask(task) {
+    return this._http.post('/tasks',task)
+  }
+  editTask(task) {
+    return this._http.put(`/tasks/${task._id}`,task)
+  }
   // getPokemon() {
   //   let _this = this;
   //   let pokemonObservable = this._http.get('https://pokeapi.co/api/v2/pokemon/1/');

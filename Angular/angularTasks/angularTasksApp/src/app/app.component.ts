@@ -11,6 +11,11 @@ export class AppComponent implements OnInit {
   // randNum: number;
   // str: string;
   // first_name: string;
+  newTask = {
+    title: "",
+    description: "",
+    completed: false,
+  }
   showTasks: boolean = false;
   tasks;
   searched;
@@ -39,9 +44,32 @@ export class AppComponent implements OnInit {
     let input = document.querySelector("input");
     let taskNumber = Number(input.value)-1;
     this.searchedTask = this.tasks[taskNumber]
-    console.log(!this.searchedTask);
+    input.value = "";
     // let one_task = this._httpService.getOneTask(id);
     // one_task.subscribe(data => {
     //   this.searchedTask = data;
+  }
+  delete(id){
+    let deleter = this._httpService.deleteTask(id);
+    deleter.subscribe(data => console.log(data));
+    this.getTasksFromService();
+    this.searched = false;
+  }
+  submit(){
+    let poster = this._httpService.postTask(this.newTask);
+    poster.subscribe(data => console.log(data));
+    this.getTasksFromService();
+    this.newTask = {
+      title: "",
+      description: "",
+      completed: false,
+    }
+  }
+  edit(){
+    let editor = this._httpService.editTask(this.searchedTask);
+    editor.subscribe(data => console.log(data));
+    this.searched = false;
+    this.searchedTask = false;
+    this.getTasksFromService();
   }
 }
