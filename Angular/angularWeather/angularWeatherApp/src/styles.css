@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+.main-content {
+    display: inline-block;
+    width: 48%;
+    vertical-align: middle
+}
