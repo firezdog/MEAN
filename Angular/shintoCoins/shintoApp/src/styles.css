@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+ul {
+    margin-left: 10%;
+    text-transform: uppercase;
+    font-size: 2em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+li:not(:first-child):not(:last-child) {
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+}
+
+li:first-child {
+    border-right: 2px solid black;
+}
+
+li:last-child {
+    border-left: 2px solid black;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.container {
+    font-size: 2em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+form button {
+    margin-left: 5px;
+}

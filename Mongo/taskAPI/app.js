@@ -37,7 +37,6 @@ app.get('/tasks/', function(req, res) {
         }
     });
 });
-
 //Update
 app.put('/tasks/:task', function(req,res) {
     console.log(req.params.task);
@@ -55,7 +54,6 @@ app.put('/tasks/:task', function(req,res) {
         }
     });
 });
-
 //Show
 app.get('/tasks/:task', function(req,res) {
     Task.findById(req.params.task, function(err, task) {
@@ -69,7 +67,6 @@ app.get('/tasks/:task', function(req,res) {
         }
     });
 });
-
 //Create (only one instead of two because we have no form)
 app.post('/tasks/', function(req,res) {
     var task = new Task(req.body);
@@ -87,7 +84,6 @@ app.post('/tasks/', function(req,res) {
         }
     })
 });
-
 //Delete
 app.delete('/tasks/:task', function(req,res) {
     Task.findByIdAndRemove(req.params.task, function(err){
