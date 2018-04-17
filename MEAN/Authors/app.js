@@ -1,0 +1,101 @@
+//SETUP
+
+var express = require('express');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var path = require('path');
+var app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.use(express.static(__dirname + '/authorsApp/dist'));
+
+//MONGOOSE
+
+mongoose.connect('mongodb://localhost/authors');
+
+var AuthorSchema = new mongoose.Schema({
+    name: {
+        type: String, 
+        required: [true, "Author must have a name."],
+        unique: true,
+        minlength: [3, "Author name must be at least 3 characters long."]
+    }
+});
+
+mongoose.model('Author', AuthorSchema);
+var Author = mongoose.model('Author');
+
+//ROUTES
+
+app.get('/api/authors', function(req, res) {
+    Author.find(function(err,result){
+        if(err){
+            res.json({
+                message: "error",
+                error: result
+            });
+        } else {
+            res.json({
+                message: "success",
+                result: result 
+            })
+        }
+    });
+});
+
+app.post('/api/authors', function(req,res) {
+    Author.create(req.body, function(err,result) {
+        if(err) {
+            res.json({
+                message: "error",
+                error: err});
+        } else {
+            res.json({
+                message: "success",
+                result: result
+            })
+        }
+    });
+});
+
+app.get('/api/authors/:id', function(req,res){
+    Author.findById(req.params.id, function(err, author){
+        if(err) { res.json({message: "error", error: err}); }
+        else    { res.json({message: "success", result: author }) }
+    });
+});
+
+app.delete('/api/authors/:id', function(req,res) {
+    Author.findByIdAndRemove(req.params.id, function(err){
+        if(err) { res.json({message: "error", error: err}); } 
+        else    { res.json({message: "success"}); }
+    });
+});
+
+app.put('/api/authors/:id', function(req,res){
+    author = new Author(req.body);
+    author.validate(function(err){
+        if(err) {
+            res.json({message: "error", error: err});
+        }
+        else {
+            Author.findByIdAndUpdate(req.params.id, req.body, function(err){
+                if(err) {
+                    res.json({message: "error", error: err});
+                } else {
+                    res.json({message: "success"})
+                }
+            });
+        }
+     });
+});
+
+app.all("*", (req,res,next) => {
+    res.sendFile(path.resolve("./authorsApp/dist/index.html"))
+});
+
+app.listen(8000,function(){
+    console.log("Listening on Port 8000");
+});
