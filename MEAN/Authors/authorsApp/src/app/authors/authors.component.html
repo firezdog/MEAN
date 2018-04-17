@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Author Name 
+        <span *ngIf="!ascending; else down" (click)="authorSort()"><i class="fas fa-sort-down"></i></span><ng-template #down><span (click)="authorSort()"><i class="fas fa-sort-up"></i></span></ng-template>
+      </th>
+      <th scope="col">Actions Available</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let author of data?.result">
+      <td>{{author.name}}</td>
+      <td>
+        <button class="btn btn-info" [routerLink]="['/authors/',author._id]">Edit</button>
+        <button class="btn btn-danger" (click)="delete(author._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
