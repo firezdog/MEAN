@@ -41,4 +41,4 @@ export class AuthorsNewComponent implements OnInit {
     //Reset object.
     this.newAuthor = { name: "" };
   }
-}
+} 

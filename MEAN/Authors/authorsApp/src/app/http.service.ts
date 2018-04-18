@@ -13,13 +13,16 @@ export class HttpService {
     return this._http.get('/api/authors');
   }
   getAuthor(id) {
-    return this._http.get(`api/authors/${id}`)
+    return this._http.get(`api/authors/${id}`);
   }
   deleteAuthor(id){
-    return this._http.delete(`/api/authors/${id}`)
+    return this._http.delete(`/api/authors/${id}`);
   }
   putAuthor(id, author){
-    return this._http.put(`/api/authors/${id}`, author)
+    return this._http.put(`/api/authors/${id}`, author);
+  }
+  postQuote(author_id, quote) {
+    return this._http.put(`/api/authors/${author_id}/quote`, quote);
   }
 
 }

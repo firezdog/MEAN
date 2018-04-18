@@ -2,7 +2,10 @@
   <thead>
     <tr>
       <th scope="col">Author Name 
-        <span *ngIf="!ascending; else down" (click)="authorSort()"><i class="fas fa-sort-down"></i></span><ng-template #down><span (click)="authorSort()"><i class="fas fa-sort-up"></i></span></ng-template>
+        <span *ngIf="!ascending; else down" (click)="authorSort()"><i class="fas fa-sort-down"></i></span>
+        <ng-template #down>
+          <span (click)="authorSort()"><i class="fas fa-sort-up"></i></span>
+        </ng-template>
       </th>
       <th scope="col">Actions Available</th>
     </tr>
@@ -11,8 +14,9 @@
     <tr *ngFor="let author of data?.result">
       <td>{{author.name}}</td>
       <td>
-        <button class="btn btn-info" [routerLink]="['/authors/',author._id]">Edit</button>
-        <button class="btn btn-danger" (click)="delete(author._id)">Delete</button>
+        <button class="btn btn-primary" [routerLink]="['/authors/'+author._id+'/quotes']"><i class="fas fa-quote-right"></i></button>
+        <button class="btn btn-info" [routerLink]="['/authors/',author._id]"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-danger" (click)="delete(author._id)"><i class="fas fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>

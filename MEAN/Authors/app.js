@@ -21,7 +21,17 @@ var AuthorSchema = new mongoose.Schema({
         required: [true, "Author must have a name."],
         unique: true,
         minlength: [3, "Author name must be at least 3 characters long."]
-    }
+    },
+    quotes: [{
+        text: {
+            type: String,
+            required: [true, "Quote must have text."],
+            minlength: [3, "Quote must be at least 3 characters long."]
+        },
+        votes: {
+            type: Number
+        }
+    }]
 });
 
 mongoose.model('Author', AuthorSchema);
@@ -48,6 +58,7 @@ app.get('/api/authors', function(req, res) {
 app.post('/api/authors', function(req,res) {
     Author.create(req.body, function(err,result) {
         if(err) {
+            console.log(err);
             res.json({
                 message: "error",
                 error: err});
@@ -90,6 +101,23 @@ app.put('/api/authors/:id', function(req,res){
             });
         }
      });
+});
+
+app.put('/api/authors/:id/quote', function(req, res) {
+    Author.findById(req.params.id, function(err, author){
+        if(err){
+            res.json({message: "error", error: "error"});
+        } else {
+            author.quotes.push(req.body);
+            author.save(function(err,author){
+                if(err){
+                    res.json({message:"error", error:err});
+                } else {
+                    res.json({message:"success", author: author});
+                }
+            })
+        }
+    })
 });
 
 app.all("*", (req,res,next) => {

@@ -10,7 +10,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FormsModule } from '@angular/forms';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthorComponent } from './author/author.component'
+import { AuthorComponent } from './author/author.component';
+import { QuotesComponent } from './quotes/quotes.component';
+import { QuotesNewComponent } from './quotes-new/quotes-new.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AuthorComponent } from './author/author.component'
     AuthorsComponent,
     AuthorsNewComponent,
     NotFoundComponent,
-    AuthorComponent
+    AuthorComponent,
+    QuotesComponent,
+    QuotesNewComponent
   ],
   imports: [
     BrowserModule,
